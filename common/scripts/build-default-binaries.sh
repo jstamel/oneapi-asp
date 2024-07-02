@@ -4,8 +4,8 @@
 ## SPDX-License-Identifier: MIT
 
 ###############################################################################
-# Compile the simple-add-buffers.fpga file and copy it to the default binary 
-# location. This script requires setup-asp.py to execute successfully first to 
+# Compile the simple-add-buffers.fpga file and copy it to the default binary
+# location. This script requires setup-asp.py to execute successfully first to
 # generate the required files in ASP HW folder.
 ###############################################################################
 
@@ -41,9 +41,9 @@ if [ "$BOARD" == "all" ] ; then
   variant_list=()
   for dir in $ASP_ROOT/hardware/*/ ; do
     variant_name=$(basename $dir)
-    if [ "$variant_name" != "common" ]; then	  
-      variant_list+=($variant_name)  
-    fi  
+    if [ "$variant_name" != "common" ]; then
+      variant_list+=($variant_name)
+    fi
   done
 else
     declare -a variant_list=("$BOARD")
@@ -69,7 +69,7 @@ do
     echo "---------------------------------------------------------------"
     echo "Starting default ${this_variant} binary compile at: $(date)"
     echo -e "Using oneAPI compiler version:\n$(icpx --version)\n"
-    echo -e "Using Quartus version:\n$(quartus_sh --version)"
+    echo -e "Using Quartus version:\n$($QUARTUS_ROOTDIR_OVERRIDE/bin/quartus_sh --version)"
     echo "---------------------------------------------------------------"
     this_cmd="icpx -fsycl -fintelfpga -Xshardware -Xstarget="$ASP_ROOT":"$this_variant" -Xsbsp-flow="$ASP_FLOW" "$ASP_ROOT/$CPP_FILE" -DFPGA_HARDWARE -o "$this_variant".fpga"
     #display the build cmd we'll run
@@ -77,7 +77,7 @@ do
     #run the command
     $this_cmd
     echo "Finished binary compile at: $(date)"
-    
+
     if [ -f "$BUILD_DIR/${this_variant}.fpga" ]; then
         mkdir -p "$ASP_ROOT/bringup/binaries"
         cp "$BUILD_DIR/${this_variant}.fpga" "$ASP_ROOT/bringup/binaries/${this_variant}.fpga"
