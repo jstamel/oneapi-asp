@@ -52,6 +52,8 @@ Need to set **OPAE_PLATFORM_ROOT** to point to pr_build_template in FIM build ar
 
 Need to set **OFS_ASP_ROOT** to point to oneapi-asp/d5005.
 
+Need to install [oneAPI Base Toolkit](https://www.intel.com/content/www/us/en/developer/tools/oneapi/base-toolkit.html) and set **INTELFPGAOCLSDKROOT** using `setvars.sh`.
+
 To generate ASP hardware and software, acquire the appropriate resources (mentioned above) and run: `scripts/build-asp.sh`.
 
 To generate MMD software only run: `scripts/build_mmd.sh`
