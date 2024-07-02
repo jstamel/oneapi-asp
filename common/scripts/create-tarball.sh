@@ -5,7 +5,7 @@
 
 ###############################################################################
 # Script to generate the tarball used for distributing the OneAPI ASP.  Creates
-# tarball with directory prefix oneapi-asp-<platform_name> and includes files 
+# tarball with directory prefix oneapi-asp-<platform_name> and includes files
 # for hardware targets, MMD, and the default binary in bringup directory.
 ###############################################################################
 
@@ -42,8 +42,8 @@ fi
 if [ -d "build/json-c/install" ]; then
     mkdir -p $ASP_ROOT/oneapi-asp-$PLATFORM_NAME/build/json-c && cp -rf build/json-c/install $ASP_ROOT/oneapi-asp-$PLATFORM_NAME/build/json-c/
 fi
-if [ -n "$(find ./bringup/ -name *.aocx)" ]; then
-    mkdir -p $ASP_ROOT/oneapi-asp-$PLATFORM_NAME/bringup/aocxs && cp -f bringup/aocxs/*.aocx $ASP_ROOT/oneapi-asp-$PLATFORM_NAME/bringup/aocxs/
+if [ -n "$(find ./bringup/ -name *.fpga)" ]; then
+    mkdir -p $ASP_ROOT/oneapi-asp-$PLATFORM_NAME/bringup/binaries && cp -f bringup/binaries/*.fpga $ASP_ROOT/oneapi-asp-$PLATFORM_NAME/bringup/binaries/
 fi
 
 tar czf oneapi-asp-$PLATFORM_NAME.tar.gz --owner=0 --group=0 --no-same-owner --no-same-permissions oneapi-asp-$PLATFORM_NAME
